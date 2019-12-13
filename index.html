@@ -10,12 +10,12 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
     <nav class="d-flex justify-content-between bg-light">
-        
+
         <div class="p-2">
             <h1 class="navbar-brand">Master of <i class="fab fa-js-square"></i></h1>
         </div>
@@ -23,19 +23,27 @@
             <h2><span id="timer">00</span></h2>
         </div>
     </nav>
-    
-   
+
+
     <div class="container mt-5 text-center p-3 border rounded">
         <div id="questions"></div>
         <div id="answer-msg"></div>
         <div id="start">
             <h1>Coding Quiz Challenge</h1>
-            <p>
+            <br>
+            <p class="w-75 mx-auto">
                 Try to answer the questions within the time limit. Keep in mind that
-                incorrect answers will penalize your score/time by 10 seconds.
+                incorrect answers will penalize your time by 10 seconds.
             </p>
-            <button class="btn btn-primary" onclick="startQuiz()">Start</button>
-            <button class="btn btn-primary" onclick="displayHighscores()">Highscores</button>
+            <br>
+            <button class="btn btn-primary" onclick="startQuiz()">
+                <i class="far fa-play-circle"></i>
+                Start
+            </button>
+            <button class="btn btn-secondary" onclick="displayHighscores()">
+                <i class="fas fa-medal"></i>
+                Highscores
+            </button>
         </div>
         <div id="end" class="text-left d-none">
             <h1>Game Over!!!</h1>
@@ -45,25 +53,25 @@
                     <input type="text" class="form-control" id="initials" placeholder="Your Initials">
                 </div>
 
-                <button  class="btn btn-primary mb-2" onclick="addToHighScore()">Submit</button>
+                <button class="btn btn-primary mb-2" onclick="addToHighScore()">Submit</button>
             </form>
         </div>
         <div id="highscores" class="d-none">
             <h2>JS Masters</h2>
             <ul class="list-group">
                 <li class="list-group-item d-flex justify-content-between align-items-center font-weight-bold">
-                  Initials
-                  <span >Score</span>
+                    Initials
+                    <span>Score</span>
                 </li>
-                
-              </ul>
-              <div class="trophy"> 
+
+            </ul>
+            <div class="trophy">
                 <br>
                 <i class="fas fa-trophy fa-7x"></i>
-              </div>
-              <div class="d-flex justify-content-end mt-3">                   
-                <button  class="btn btn-primary " onclick="back()">Back</button>
-              </div>
+            </div>
+            <div class="d-flex justify-content-end mt-3">
+                <button class="btn btn-primary " onclick="back()">Back</button>
+            </div>
         </div>
     </div>
 
