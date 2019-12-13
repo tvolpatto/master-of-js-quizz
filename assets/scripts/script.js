@@ -9,7 +9,28 @@ var questions = [
     title: "The condition in an if / else statement is enclosed within ____.",
     choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
     answer: "parentheses"
+  },
+  {
+    title: "Commonly used data types DO NOT include:",
+    choices: ["strings", "booleans", "alerts", "numbers"],
+    answer: "alerts"
+  },
+  {
+    title: "The condition in an if / else statement is enclosed within ____.",
+    choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
+    answer: "parentheses"
+  },
+  {
+    title: "Commonly used data types DO NOT include:",
+    choices: ["strings", "booleans", "alerts", "numbers"],
+    answer: "alerts"
+  },
+  {
+    title: "The condition in an if / else statement is enclosed within ____.",
+    choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
+    answer: "parentheses"
   }
+
 ];
 
 var divQuestion = $("#questions");
@@ -56,7 +77,7 @@ function startQuiz() {
       }
       $("#timer").text(countdown--);
     } else {
-      finishQuizz();
+     finishQuizz();
     }
   }, 1000);
 }
@@ -72,11 +93,11 @@ function choiceClick() {
   var userAnswer = $(this).text();
 
   if (questions[idx].answer === userAnswer) {
-    displayAnswerMsg("text-success", "Correct!");
+    displayAnswerMsg($(this), "correct", "Correct!");
     score++;
   } else {
     countdown -= 9;
-    displayAnswerMsg("text-danger", "Wrong!");
+    displayAnswerMsg($(this), "wrong", "Wrong!");
   }
 
   index = idx + 1;
@@ -90,9 +111,9 @@ function choiceClick() {
   }
 }
 
-function displayAnswerMsg(clazz, text) {
-  answerMsg.removeClass("d-none text-success text-danger").addClass(clazz);
-  answerMsg.text(text);
+function displayAnswerMsg(elm, clazz, text) {
+   elm.addClass(`${clazz} d-flex justify-content-between`);
+   elm.append(`<span class="m-2">${text}</span>`); 
 }
 
 function clearScreen() {

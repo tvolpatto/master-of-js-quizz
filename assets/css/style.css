@@ -27,6 +27,19 @@ body {
     cursor: pointer;
     
 }
+
 .choice:active {
     opacity: 0.5;
+}
+
+.correct {
+    background-color: lightgreen;
+    border-color: green !important;
+    color: green;
+}
+
+.wrong {
+    background-color: lightsalmon;
+    border-color: red !important;
+    color: red;
 }
