@@ -10,24 +10,20 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
-    <nav class="d-flex justify-content-between bg-light h-50">
-
-        <div class="p-2 mt-2">
-            <span class="view-highscores">View Highscores</span>
-        </div>
+    <nav class="d-flex justify-content-between bg-light">
+        
         <div class="p-2">
-
             <h1 class="navbar-brand">Master of <i class="fab fa-js-square"></i></h1>
-
-
         </div>
-        <div class="p-2 p-b-0.font-weight-bold">
+        <div class="p-2 p-b-0.font-weight-bold a-timer">
             <h2><span id="timer">00</span></h2>
         </div>
     </nav>
+    
    
     <div class="container mt-5 text-center">
         <div id="questions"></div>
@@ -39,19 +35,28 @@
                 incorrect answers will penalize your score/time by 10 seconds.
             </p>
             <button class="btn btn-primary" onclick="startQuiz()">Start</button>
+            <button class="btn btn-primary" onclick="displayHighscores()">Highscores</button>
         </div>
         <div id="end" class="text-left d-none">
             <h1>Game Over!!!</h1>
             <h3 class>Your score: <span id="score">00</span></h3>
-            <form class="form-inline">
+            <form class="form-inline d-none">
                 <div class="form-group mb-2">
                     <input type="text" class="form-control" id="initials" placeholder="Your Initials">
                 </div>
 
-                <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                <button  class="btn btn-primary mb-2" onclick="addToHighScore()">Submit</button>
             </form>
         </div>
-        <div id="highscores"></div>
+        <div id="highscores" class="d-none">
+            <h2>JS Masters</h2>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Initials
+                  <span >Score</span>
+                </li>
+              </ul>
+        </div>
     </div>
 
     <!-- Optional JavaScript -->
