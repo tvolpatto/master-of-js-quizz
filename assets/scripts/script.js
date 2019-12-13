@@ -162,6 +162,9 @@ function displayHighscores() {
               </li>`);
     ul.append(li);
   });  
+  if (highscores.length > 0) {
+    $(".trophy").addClass("d-none");
+  }
 }
 
 function back() {
