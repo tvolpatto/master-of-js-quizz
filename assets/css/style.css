@@ -16,3 +16,17 @@ body {
 .trophy {
     opacity: 0.05;
 }
+
+.choice {
+    background-color: rgb(221, 228, 241);
+}
+
+.choice:hover  {
+    border-color: black !important;
+    font-weight: bold;
+    cursor: pointer;
+    
+}
+.choice:active {
+    opacity: 0.5;
+}

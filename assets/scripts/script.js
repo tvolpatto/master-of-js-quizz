@@ -27,14 +27,16 @@ var highscores = localStorage.getItem("highscores") != null
 function displayQuestion(index) {
 
   var question = questions[index];
-  var divTitle = $("<div>");
-  divTitle.text(question.title);
-  divQuestion.append(divTitle);
+  var questionTitle = $("<h4>");
+  questionTitle.addClass("mb-3");
+  questionTitle.text(question.title);
+  divQuestion.append(questionTitle);
+
   question.choices.forEach(choice => {
     var divChoice = $("<div>");
-    divChoice.addClass(".choice");
+    divChoice.addClass("choice border border-info rounded p-1 mt-1 w-50");
     divChoice.attr("data-index", index);
-    divChoice.text(choice);
+    divChoice.append(`<span class="m-2 ">${choice}</span>`);
     divChoice.click(choiceClick);
     divQuestion.append(divChoice);
 
