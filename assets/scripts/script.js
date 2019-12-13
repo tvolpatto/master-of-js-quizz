@@ -99,6 +99,7 @@ function clearScreen() {
   answerMsg.addClass("d-none");
   $(".form-inline").addClass("d-none");
   $("#end").addClass("d-none");
+  $("#highscores").addClass("d-none");
 
 }
 
@@ -160,7 +161,11 @@ function displayHighscores() {
                 <span>${hs.score}</span>
               </li>`);
     ul.append(li);
-  });
+  });  
+}
 
+function back() {
+  clearScreen();
+  $("#start").removeClass("d-none");
 
 }
