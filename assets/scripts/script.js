@@ -96,7 +96,7 @@ function choiceClick() {
     displayAnswerMsg($(this), "correct", "Correct!");
     updateScore();
   } else {
-    countdown -= 9;
+    updateTimer()
     displayAnswerMsg($(this), "wrong", "Wrong!");
   }
 
@@ -109,6 +109,14 @@ function choiceClick() {
   } else {
     finishQuizz();
   }
+}
+
+function updateTimer() {
+  countdown -= 9;
+  animateTimer() ;
+  setTimeout(() => {
+    $("#timer").removeClass("text-danger");
+  }, 400);
 }
 
 function updateScore() {
@@ -141,7 +149,8 @@ function finishQuizz() {
   divQuestion.addClass("d-none");
   clearScreen();
   checkHighScores();
-  $("#score").text(score);
+  $("#final-score").text(score);
+  $(".score").addClass("d-none");
   $("#end").removeClass("d-none");
 }
 
