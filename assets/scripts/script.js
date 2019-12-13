@@ -37,16 +37,18 @@ var divQuestion = $("#questions");
 var answerMsg = $("#answer-msg");
 var index = 0;
 var score = 0;
-var numberOfQuestions = questions.length;
-var countdown = 15 * numberOfQuestions;
+var countdown = 0;
+var numberOfQuestions = 0;
 var myTimer;
-var playerResults = { initials: "PLR", score: 0, position: 5 };
-var highscores = localStorage.getItem("highscores") != null
-  ? JSON.parse(localStorage.getItem("highscores")) : [];
+var playerResults = {};
+var highscores = [];
+
+$(document).ready(function () {
+  initVariables();
+});
 
 
-function displayQuestion(index) {
-
+function displayQuestion() {
   var question = questions[index];
   var questionTitle = $("<h4>");
   questionTitle.addClass("mb-3");
@@ -60,16 +62,17 @@ function displayQuestion(index) {
     divChoice.append(`<span class="m-2 ">${choice}</span>`);
     divChoice.click(choiceClick);
     divQuestion.append(divChoice);
-
   });
 
+  divQuestion.removeClass("d-none");
 }
 
 function startQuiz() {
-
+  initVariables();
   $("#timer").text(countdown);
-  displayQuestion(index);
+  displayQuestion();
   $("#start").addClass("d-none");
+
   myTimer = setInterval(function () {
     if (countdown >= 0) {
       if (countdown < 10) {
@@ -77,9 +80,18 @@ function startQuiz() {
       }
       $("#timer").text(countdown--);
     } else {
-     finishQuizz();
+      finishQuizz();
     }
   }, 1000);
+}
+
+function initVariables() {
+  index = 0;
+  numberOfQuestions = questions.length;
+  countdown = 15 * numberOfQuestions;
+  playerResults = { initials: "PLR", score: 0, position: 5 };
+  highscores = localStorage.getItem("highscores") != null
+    ? JSON.parse(localStorage.getItem("highscores")) : [];
 }
 
 function animateTimer() {
@@ -104,7 +116,7 @@ function choiceClick() {
   if (index < numberOfQuestions) {
     setTimeout(() => {
       clearScreen();
-      displayQuestion(index);
+      displayQuestion();
     }, 500);
   } else {
     finishQuizz();
@@ -113,7 +125,7 @@ function choiceClick() {
 
 function updateTimer() {
   countdown -= 9;
-  animateTimer() ;
+  animateTimer();
   setTimeout(() => {
     $("#timer").removeClass("text-danger");
   }, 400);
@@ -126,12 +138,12 @@ function updateScore() {
   setTimeout(() => {
     $("#score").removeClass("text-success");
   }, 400);
-  
+
 }
 
 function displayAnswerMsg(elm, clazz, text) {
-   elm.addClass(`${clazz} d-flex justify-content-between`);
-   elm.append(`<span class="m-2">${text}</span>`); 
+  elm.addClass(`${clazz} d-flex justify-content-between`);
+  elm.append(`<span class="m-2">${text}</span>`);
 }
 
 function clearScreen() {
@@ -141,6 +153,8 @@ function clearScreen() {
   $(".form-inline").addClass("d-none");
   $("#end").addClass("d-none");
   $("#highscores").addClass("d-none");
+  $(".hs-item").empty();
+  $(".score").removeClass("d-none");
 
 }
 
@@ -157,38 +171,43 @@ function finishQuizz() {
 function addToHighScore() {
   playerResults.initials = $("#initials").val() != "" ? $("#initials").val() : "PLR";
   playerResults.score = score;
+  
   var idx = playerResults.position;
+  $.each(highscores, (i, hs) => {
+    if(hs.score < playerResults.score) {
+      playerResults.position = i+1;
+      highscores[i] = playerResults;
+      playerResults = hs;
+    }    
+  });
   if (idx < 5) {
-    var aux = { position: 5 };
-    if (idx < highscores.length) {
-      aux = highscores[idx];
-      aux.position++;
-    }
-    highscores[idx] = playerResults;
-    playerResults = aux;
-    addToHighScore();
+     playerResults.position++;
+    highscores.push(playerResults);
   }
+
   localStorage.setItem("highscores", JSON.stringify(highscores));
-  playerResults = { initials: "PLR", score: 0, position: 5 };
   displayHighscores();
 }
 
 function checkHighScores() {
-  var position = highscores.length;
-  if (position < 5) {
+  if (score > 0) {
+    var position = highscores.length;
     playerResults.position = position;
 
-  } else {
     for (var i = position - 1; i >= 0; i--) {
-      if (playerResults.score > highscores[i].score) {
+      if (score > highscores[i].score) {
         playerResults.position = i;
       } else {
         break;
       }
     }
   }
-  if (playerResults.position < 5) {
-    $(".form-inline").removeClass("d-none");
+  if (playerResults.position < 5 && score > 0) {
+    $("#final-msg").text("Congratulations!");
+    $(".hs-update").removeClass("d-none");
+  } else {
+    $(".hs-update").addClass("d-none");
+    $("#final-msg").text("Game Over!");
   }
 
 }
@@ -198,12 +217,12 @@ function displayHighscores() {
   $("#highscores").removeClass("d-none");
   var ul = $(".list-group");
   highscores.forEach(hs => {
-    var li = $(`<li class="list-group-item d-flex justify-content-between align-items-center">
+    var li = $(`<li class="hs-item list-group-item d-flex justify-content-between align-items-center">
                 ${hs.initials}
                 <span>${hs.score}</span>
               </li>`);
     ul.append(li);
-  });  
+  });
   if (highscores.length > 0) {
     $(".trophy").addClass("d-none");
   }
@@ -212,5 +231,4 @@ function displayHighscores() {
 function back() {
   clearScreen();
   $("#start").removeClass("d-none");
-
 }
