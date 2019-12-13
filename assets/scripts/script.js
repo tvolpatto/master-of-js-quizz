@@ -73,7 +73,7 @@ function startQuiz() {
   myTimer = setInterval(function () {
     if (countdown >= 0) {
       if (countdown < 10) {
-        animate();
+        animateTimer();
       }
       $("#timer").text(countdown--);
     } else {
@@ -82,7 +82,7 @@ function startQuiz() {
   }, 1000);
 }
 
-function animate() {
+function animateTimer() {
   $("#timer").addClass("text-danger");
   $("#timer").animate({ "font-size": "2.5rem" });
   $("#timer").animate({ "font-size": "2rem" });
@@ -94,7 +94,7 @@ function choiceClick() {
 
   if (questions[idx].answer === userAnswer) {
     displayAnswerMsg($(this), "correct", "Correct!");
-    score++;
+    updateScore();
   } else {
     countdown -= 9;
     displayAnswerMsg($(this), "wrong", "Wrong!");
@@ -109,6 +109,16 @@ function choiceClick() {
   } else {
     finishQuizz();
   }
+}
+
+function updateScore() {
+  score++;
+  $("#score").addClass("text-success");
+  $("#score").text(score);
+  setTimeout(() => {
+    $("#score").removeClass("text-success");
+  }, 400);
+  
 }
 
 function displayAnswerMsg(elm, clazz, text) {

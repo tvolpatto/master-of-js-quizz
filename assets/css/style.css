@@ -7,10 +7,14 @@ body {
 }
 
 .a-timer {
-
     position: absolute;
     right: 0;
     top: 0;
+}
+.score {
+    position: absolute;
+    left: 0;
+    top: 5;
 }
 
 .trophy {
