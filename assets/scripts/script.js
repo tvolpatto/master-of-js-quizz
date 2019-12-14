@@ -47,7 +47,6 @@ $(document).ready(function () {
   initVariables();
 });
 
-
 function displayQuestion() {
   var question = questions[index];
   var questionTitle = $("<h4>");
@@ -169,6 +168,7 @@ function finishQuizz() {
 }
 
 function addToHighScore() {
+  
   playerResults.initials = $("#initials").val() != "" ? $("#initials").val() : "PLR";
   playerResults.score = score;
   
@@ -186,7 +186,7 @@ function addToHighScore() {
   }
 
   localStorage.setItem("highscores", JSON.stringify(highscores));
-  displayHighscores();
+  
 }
 
 function checkHighScores() {
