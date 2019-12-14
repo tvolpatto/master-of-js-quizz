@@ -11,24 +11,24 @@ var questions = [
     answer: "parentheses"
   },
   {
-    title: "Commonly used data types DO NOT include:",
-    choices: ["strings", "booleans", "alerts", "numbers"],
-    answer: "alerts"
+    title: "Which event occurs when the user clicks on an HTML element?",
+    choices: ["onmouseclick", "onmouseover", "onclick", "onchange"],
+    answer: "onclick"
   },
   {
-    title: "The condition in an if / else statement is enclosed within ____.",
-    choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
-    answer: "parentheses"
+    title: `How do you write "Hello World" in an alert box?`,
+    choices: [`alertBox("Hello World");`, `alert("Hello World");`, `msg("Hello World");`, `msgBox("Hello World");`],
+    answer: `alert("Hello World");`
   },
   {
-    title: "Commonly used data types DO NOT include:",
-    choices: ["strings", "booleans", "alerts", "numbers"],
-    answer: "alerts"
+    title: "How to write an IF statement in JavaScript?",
+    choices: ["if i == 5 then", "if i = 5", "if i = 5 then","if (i == 5)"],
+    answer: "if (i == 5)"
   },
   {
-    title: "The condition in an if / else statement is enclosed within ____.",
-    choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
-    answer: "parentheses"
+    title: "How do you round the number 7.25, to the nearest integer?",
+    choices: ["ceil(x, y)", "top(x, y)", "Math.ceil(x, y)", "Math.max(x, y)"],
+    answer: "Math.max(x, y)"
   }
 
 ];
@@ -180,7 +180,7 @@ function addToHighScore() {
       playerResults = hs;
     }    
   });
-  if (idx < 5) {
+  if (idx < 5  && highscores.length < 5) {
      playerResults.position++;
     highscores.push(playerResults);
   }
