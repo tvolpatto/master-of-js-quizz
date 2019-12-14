@@ -42,6 +42,7 @@ var numberOfQuestions = 0;
 var myTimer;
 var playerResults = {};
 var highscores = [];
+var audioElement = document.createElement("audio");
 
 $(document).ready(function () {
   initVariables();
@@ -136,6 +137,7 @@ function updateScore() {
   $("#score").text(score);
   setTimeout(() => {
     $("#score").removeClass("text-success");
+   
   }, 400);
 
 }
@@ -143,7 +145,15 @@ function updateScore() {
 function displayAnswerMsg(elm, clazz, text) {
   elm.addClass(`${clazz} d-flex justify-content-between`);
   elm.append(`<span class="m-2">${text}</span>`);
+  if (clazz === "correct") {
+    audioElement.setAttribute("src", "./assets/sounds/Game-show-correct-answer.mp3");
+  } else {
+    audioElement.setAttribute("src", "./assets/sounds/Wrong-answer-sound-effect.mp3");
+  }
+  audioElement.play();
 }
+
+
 
 function clearScreen() {
   divQuestion.empty();
