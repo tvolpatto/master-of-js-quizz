@@ -153,7 +153,7 @@ function clearScreen() {
   $(".form-inline").addClass("d-none");
   $("#end").addClass("d-none");
   $("#highscores").addClass("d-none");
-  $(".hs-item").empty();
+  $(".hs-item").remove();
   $(".score").removeClass("d-none");
 
 }
